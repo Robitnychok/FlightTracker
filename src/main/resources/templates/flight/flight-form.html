@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Search Flight Departures</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        form {
+            padding: 20px;
+            width: 400px;
+            background-color: #f9f9f9;
+        }
+
+        h2 {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        label {
+            display: block;
+            margin-top: 10px;
+            margin-bottom: 5px;
+        }
+
+        input[type="text"],
+        input[type="datetime-local"] {
+            width: 100%;
+            padding: 6px;
+            margin-bottom: 5px;
+        }
+
+        input[type="submit"] {
+            margin-top: 15px;
+            width: 100%;
+            padding: 8px;
+        }
+
+        .error {
+            color: red;
+            font-size: 0.9em;
+        }
+
+        .service-error {
+            color: red;
+            font-size: 1.0em;
+            font-weight: bold;
+            margin-bottom: 20px;
+        }
+    </style>
+</head>
+<body>
+
+<form th:action="@{/api/flights/search}" th:method="post" th:object="${flightSearchRequest}">
+    <h2>Search Flights</h2>
+
+    <label for="departureAirportIcao">Departure Airport ICAO Code:</label>
+    <input type="text" th:field="*{departureAirportIcao}" id="departureAirportIcao"/>
+    <div class="error" th:if="${#fields.hasErrors('departureAirportIcao')}" th:errors="*{departureAirportIcao}">
+        DepartureAirportIcao error
+    </div>
+
+    <label for="departureTime">Departure Time:</label>
+    <input type="datetime-local" th:field="*{departureTime}" id="departureTime"/>
+    <div class="error" th:if="${#fields.hasErrors('departureTime')}" th:errors="*{departureTime}">
+        DepartureTime error
+    </div>
+
+    <label for="arrivalTime">Arrival Time:</label>
+    <input type="datetime-local" th:field="*{arrivalTime}" id="arrivalTime"/>
+    <div class="error" th:if="${#fields.hasErrors('arrivalTime')}" th:errors="*{arrivalTime}">
+        ArrivalTime error
+    </div>
+
+    <div class="service-error" th:if="${serviceError}" th:text="${serviceError}">
+        Service error message
+    </div>
+
+    <input type="submit" value="Search"/>
+</form>
+
+</body>
+</html>
