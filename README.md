@@ -1,4 +1,4 @@
-#Flight Tracker
+Flight Tracker
 
 Popis projektu:  
 Webová aplikace, která zobrazuje seznam odletů letadel z vybraného letiště v zadaném časovém rozmezí.  
